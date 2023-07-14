@@ -12,7 +12,7 @@
         <div class="p-3 px-4 border-bottom">
             <div class="d-flex align-items-start ">
                 <div class="flex-shrink-0 me-3 align-self-center">
-                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?>" class="avatar-sm rounded-circle" alt="">
+                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-12.jpg')); ?>" class="avatar-sm rounded-circle" alt="">
                 </div>
 
                 <div class="flex-grow-1">

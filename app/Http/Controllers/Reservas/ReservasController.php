@@ -61,8 +61,10 @@ class ReservasController extends Controller
             })
             ->first();
 
+        //dd($reservaExistente);
+
         if ($reservaExistente) {
-            return redirect()->route('nova.reserva')->with('error', 'Essa reserva já está agendada para esse período.');
+            return redirect()->route('nova.reserva')->with('msg', 'Já existe reserva agendada para esse período.');
         }
 
         DB::beginTransaction();
@@ -70,13 +72,13 @@ class ReservasController extends Controller
 
         if (!$reservas) {
             DB::rollBack();
-            return redirect()->route('inicioReserva')->with('message', "Falha ao cadastrar a reserva.");
+            return redirect()->route('inicioReserva')->with('msg', "Falha ao cadastrar a reserva.");
         }
         $reservas->save();
         DB::commit();
 
         return redirect()->route('inicioReserva')->with(
-            'message',
+            'msg',
             "Reserva cadastrado com sucesso."
         );
     }
@@ -101,11 +103,13 @@ class ReservasController extends Controller
         $DataHoraFim = $request->input('data_hora_fim');
 
         $reservaExistente = Reservas::where('reserva_sala_id', $reservaSala)
+
             ->where(function ($query) use ($DataHoraInicio, $DataHoraFim) {
                 $query->where('data_hora_inicio', '<=', $DataHoraInicio)
                     ->where('data_hora_fim', '>=', $DataHoraInicio)
                     ->orWhere('data_hora_inicio', '<=', $DataHoraFim)
                     ->where('data_hora_fim', '>=', $DataHoraFim);
+
             })
             ->first();
 
@@ -135,6 +139,6 @@ class ReservasController extends Controller
 
         $reservas->delete();
 
-        return redirect()->route('inicioReserva')->with('message', 'Reserva excluída com sucesso.');
+        return redirect()->route('inicioReserva')->with('msg', 'Reserva excluída com sucesso.');
     }
 }

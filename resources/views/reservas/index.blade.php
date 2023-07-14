@@ -13,7 +13,17 @@ Reservas
         @slot('li_1') Reservas @endslot
         @slot('title') Reservas @endslot
     @endcomponent
-
+    <style>
+        .msg{
+            background-color: green;
+            color: #f0f0f0;
+            border: 1px solid #f8f8f8;
+            width: 100%;
+            margin-bottom: 0;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
     <div class="row">
         <div class="col-12">
             <div class="card">
